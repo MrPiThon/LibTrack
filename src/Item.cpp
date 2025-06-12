@@ -13,3 +13,7 @@ Item::Item(std::string name, std::string  title,
             location(std::move(location)), found(found) {
 
 }
+
+std::string Item::toString() const {
+    return id + "," + title + "," + type + "," + location + "," + (found ? "Yes" : "No");
+}

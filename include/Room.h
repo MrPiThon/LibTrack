@@ -1,26 +1,27 @@
-    //
-    // Created by Alex on 6/11/2025.
-    //
+//
+// Created by Alex on 6/11/2025.
+//
 
-    #ifndef ROOM_H
-    #define ROOM_H
-    #include <optional>
-    #include <vector>
+#ifndef ROOM_H
+#define ROOM_H
+#include <optional>
+#include <vector>
 
-    #include "Item.h"
+#include "Item.h"
 
-    class Room {
-    public:
-        Room() = default;
-        Room(std::string name, const std::vector<Item> &items);
+class Room {
+public:
+    Room() = default;
+    Room(std::string name, const std::vector<Item> &items);
 
-        std::string name;
+    void addItem(const Item &item);
+    void removeItem(const std::string &itemId);
 
-        void addItem(const Item& item) const;
-        void removeItem(const Item& item) const;
-        [[nodiscard]] std::optional<Item> getItem(const std::string& id) const;
-    private:
-        std::vector<Item> items;
-    };
+    std::string name;
+    std::vector<Item> items;
+    std::string getNextItemId() const;
 
-    #endif //ROOM_H
+    std::optional<std::reference_wrapper<Item>> getItem(const std::string& id);
+};
+
+#endif //ROOM_H

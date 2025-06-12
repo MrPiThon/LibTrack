@@ -10,7 +10,7 @@
 class Item {
 public:
     Item() = default;
-    Item(std::string  name, std::string  title,
+    Item(std::string  id, std::string  title,
         std::string  type, std::string  location, bool found);
 
     std::string id;
@@ -18,6 +18,7 @@ public:
     std::string type;
     std::string location;
     bool found{};
+    [[nodiscard]] std::string toString() const;
 };
 
 #endif //ITEM_H

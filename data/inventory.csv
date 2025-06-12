@@ -1,0 +1,11 @@
+ID,Title,Type,Location,Found
+001,Design Patterns,Book,Room A,Yes
+002,C++ Primer,Book,Room A,No
+003,Python Crash Course,Book,Room A,No
+004,Photoshop Basics,Multimedia,Room B,Yes
+005,Blender Fundamentals,Multimedia,Room B,No
+006,Digital Logic Design,Book,Room C,Yes
+007,Arduino Projects,Electronics,Room C,No
+008,AV Cables Kit,Electronics,Room C,Yes
+009,Library Policies,Document,Office,Yes
+010,Maintenance Manual,Document,Maintenance,No
