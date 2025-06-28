@@ -127,7 +127,7 @@ int main() {
             case 5: {
                 searching = true;
                 while (searching) {
-                    std::cout << "\n========== FindIt ==========\n";
+                    std::cout << "\n================ FindIt ==================\n";
                     std::cout << "[1] Search by Item ID\n";
                     std::cout << "[2] Search by Item Title\n";
                     std::cout << "[3] Search by Item Type\n";
