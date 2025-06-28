@@ -19,6 +19,7 @@ int main() {
 
     InventoryManager manager(CSVHandler::readInventoryFromCSV(inputPath));
     bool continueLoop = true;
+    bool searching = false;
 
     while (continueLoop) {
         std::cout << "\n========== CIAT Library Inventory ==========\n";
@@ -26,6 +27,7 @@ int main() {
         std::cout << "[2] Toggle Found Status of Item\n";
         std::cout << "[3] Add Item\n";
         std::cout << "[4] Remove Item\n";
+        std::cout << "[5] Search Item\n";
         std::cout << "[9] Exit\n";
         std::cout << "===========================================\n";
         std::cout << "Enter choice: ";
@@ -119,6 +121,55 @@ int main() {
 
                 manager.removeBookFromRoom(roomName, itemId);
                 std::cout << "Item removed (if it existed).\n";
+                break;
+            }
+
+            case 5: {
+                searching = true;
+                while (searching) {
+                    std::cout << "\n========== FindIt ==========\n";
+                    std::cout << "[1] Search by Item ID\n";
+                    std::cout << "[2] Search by Item Title\n";
+                    std::cout << "[3] Search by Item Type\n";
+                    std::cout << "[4] Search by Location\n";
+                    std::cout << "[5] Search by Found Status (yes/no)\n";
+                    std::cout << "[9] Cancel Search\n";
+                    std::cout << "===========================================\n";
+                    std::cout << "Enter choice: ";
+
+                    int c;
+                    std::cin >> c;
+                    clearInput();
+
+                    if (c == 9) {
+                        searching = false;
+                        break;
+                    }
+
+                    std::string field, query;
+                    switch (c) {
+                        case 1: field = "id";       std::cout << "Enter Item ID (or part): "; break;
+                        case 2: field = "title";    std::cout << "Enter Item Title (or part): "; break;
+                        case 3: field = "type";     std::cout << "Enter Item Type (or part): "; break;
+                        case 4: field = "location"; std::cout << "Enter Location (or part): "; break;
+                        case 5: field = "found";    std::cout << "Enter Found Status (yes/no): "; break;
+                        default:
+                            std::cerr << "Invalid choice.\n";
+                            continue;
+                    }
+                    std::getline(std::cin >> std::ws, query);
+
+                    // Perform the search
+                    if (auto results = manager.searchByField(query, field); results.empty()) {
+                        std::cout << "No items found matching your query.\n";
+                    } else {
+                        std::cout << "\n--- Search Results ---\n";
+                        for (const auto& item : results) {
+                            std::cout << item.toString() << "\n";
+                        }
+                    }
+                    searching = false;
+                }
                 break;
             }
 

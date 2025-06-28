@@ -23,6 +23,14 @@ public:
 
     [[nodiscard]] std::string generateReport() const;
 
+    /**
+     * Search for items where any field matches (case-insensitive, partial match).
+     * @param query: Search term.
+     * @param field: "id", "title", "type", "location", or "found" (as string "yes"/"no"/"true"/"false"/"1"/"0").
+     * @return Vector of matching Items.
+     */
+    std::vector<Item> searchByField(const std::string& query, const std::string& field) const;
+
 private:
     std::map<std::string, Room> rooms; // roomName -> Room
 };
