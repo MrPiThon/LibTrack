@@ -9,6 +9,11 @@ void clearInput() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
+/**
+ * Verifies if the Id follows the proper format
+ * @param id The id to check
+ * @return A boolean representing if the id is valid
+ */
 bool isValidId(const std::string& id) {
     return !id.empty() && std::ranges::all_of(id, ::isdigit);
 }
