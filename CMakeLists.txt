@@ -1,14 +1,28 @@
-cmake_minimum_required(VERSION 3.31)
-project(LibTrack)
+cmake_minimum_required(VERSION 3.14)
+project(LibTrack VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(LibTrack src/main.cpp
+set(LIBTRACK_HEADERS
         include/Item.h
-        src/Item.cpp
         include/Room.h
-        src/Room.cpp
         include/InventoryManager.h
-        src/InventoryManager.cpp
         include/CSVHandler.h
-        src/CSVHandler.cpp)
+)
+set(LIBTRACK_SOURCES
+        src/Item.cpp
+        src/Room.cpp
+        src/InventoryManager.cpp
+        src/CSVHandler.cpp
+)
+set(MAIN_SRC src/main.cpp)
+
+include_directories(include)
+
+add_executable(LibTrack ${MAIN_SRC} ${LIBTRACK_HEADERS} ${LIBTRACK_SOURCES})
+
+target_compile_options(LibTrack PRIVATE -Wall -Wextra -pedantic)
+
+install(TARGETS LibTrack DESTINATION bin)
+install(FILES ${LIBTRACK_HEADERS} DESTINATION include)
