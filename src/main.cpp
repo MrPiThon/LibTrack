@@ -18,7 +18,34 @@ bool isValidId(const std::string& id) {
     return !id.empty() && std::ranges::all_of(id, ::isdigit);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+
+    // CHECK IF THE PROGRAM WAS RAN WITH HELP COMMAND
+    if (argc > 1) {
+        std::string arg1(argv[1]);
+        if (arg1 == "--help" || arg1 == "-h") {
+            std::cout <<
+            R"(LibTrack - Library Inventory Tracker
+
+            Usage:
+                ./LibTrack               Start the interactive CLI
+                ./LibTrack --help, -h    Show this help message
+
+            Features:
+                - View inventory report
+                - Add, remove, and search for items
+                - Toggle found status
+                - Save inventory as CSV
+
+            Files:
+                Expects inventory CSV in ../data/inventory.csv by default.
+
+            )";
+            return 0;
+        }
+    }
+
+
     const std::string inputPath = "../data/inventory.csv";
     const std::string outputPath = "../data/updated_inventory.csv";
 
@@ -33,6 +60,7 @@ int main() {
         std::cout << "[3] Add Item\n";
         std::cout << "[4] Remove Item\n";
         std::cout << "[5] Search Item\n";
+        std::cout << "[8] Help\n";
         std::cout << "[9] Exit\n";
         std::cout << "===========================================\n";
         std::cout << "Enter choice: ";
@@ -178,13 +206,34 @@ int main() {
                 break;
             }
 
+            case 8: {
+                std::cout <<
+                R"(LibTrack - Library Inventory Tracker
+
+                Usage:
+                    ./LibTrack               Start the interactive CLI
+                    ./LibTrack --help, -h    Show this help message
+
+                Features:
+                    - View inventory report
+                    - Add, remove, and search for items
+                    - Toggle found status
+                    - Save inventory as CSV
+
+                Files:
+                    Expects inventory CSV in ../data/inventory.csv by default.
+
+                )";
+                break;
+            }
+
             case 9: {
                 continueLoop = false;
                 break;
             }
 
             default:
-                std::cerr << "Invalid choice. Please enter 1, 2, 3, 4, or 9.\n";
+                std::cerr << "Invalid choice. Please enter 1, 2, 3, 4, 8 or 9.\n";
                 break;
         }
     }
